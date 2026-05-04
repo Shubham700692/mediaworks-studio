@@ -16,17 +16,11 @@ exports.sendContact = async (req, res) => {
 
   try {
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: Number(process.env.SMTP_PORT) === 465, // True for 465, false for other ports
+  service: 'gmail',
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    pass: process.env.SMTP_PASS, // This MUST be the 16-character code
   },
-  tls: {
-    // This is critical for cloud hosting like Render to prevent connection blocking
-    rejectUnauthorized: false 
-  }
 });
 
     await transporter.sendMail({
