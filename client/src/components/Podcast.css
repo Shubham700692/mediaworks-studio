@@ -1,0 +1,103 @@
+.podcast-section {
+  padding: 100px 0;
+  /* background: var(--bg-base); */
+  background: var(--deep);
+}
+
+.podcast-header {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.podcast-main-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--white);
+}
+
+.accent-text {
+  color: var(--accent-gold);
+}
+
+.podcast-description {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 500px;
+}
+
+/* The 3-Column Grid */
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.podcast-card {
+  /* background: var(--bg-surface); */
+  background: var(--black);
+  border: 1px solid var(--border-subtle);
+  padding: 3rem 2rem;
+  position: relative;
+  transition: all 0.4s var(--ease-reveal);
+}
+
+.podcast-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-5px);
+  background: var(--surface);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.card-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  opacity: 0.1;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.card-arrow {
+
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--gold);
+  transform: translateX(0);
+  transition: transform 0.3s;
+}
+.podcast-card:hover .card-arrow { transform: translateX(8px); }
+
+.podcast-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-out-expo);
+  transform-origin: left;
+}
+.podcast-card:hover::after,
+.podcast-card:hover::after { transform: scaleX(1); }
+
+@media (max-width: 968px) {
+  .podcast-header { grid-template-columns: 1fr; gap: 2rem; }
+  .podcast-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,93 @@
+.testimonials {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-top: 1px solid var(--border);
+  background: var(--black);
+}
+
+.testimonials-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-area {
+  margin: 2.5rem 0;
+  animation: fadeIn 0.6s var(--ease-out-expo);
+}
+
+.quote-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--white);
+  margin-bottom: 2rem;
+  position: relative;
+}
+.quote-text::before {
+  content: '"';
+  font-family: var(--font-display);
+  font-size: 8rem;
+  color: var(--gold);
+  opacity: 0.12;
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 48px; height: 48px;
+  background: var(--surface);
+  border: 1px solid var(--gold-dim);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-weight: 500;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+.author-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.quote-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.dot {
+  width: 6px; height: 6px;
+  background: var(--border);
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.dot.active { background: var(--gold); transform: scale(1.4); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
