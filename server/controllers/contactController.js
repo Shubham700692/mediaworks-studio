@@ -15,17 +15,18 @@ exports.sendContact = async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT) || 465,
-  secure: true, // Use true for 465
+  secure: Number(process.env.SMTP_PORT) === 465, // True for 465, false for other ports
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  connectionTimeout: 5000, // 5 seconds timeout
-  greetingTimeout: 5000,
-  socketTimeout: 5000
+  tls: {
+    // This is critical for cloud hosting like Render to prevent connection blocking
+    rejectUnauthorized: false 
+  }
 });
 
     await transporter.sendMail({
