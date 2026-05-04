@@ -1,4 +1,4 @@
-require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -21,6 +21,8 @@ app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
 app.use(express.json());
 console.log("MONGO:", process.env.MONGODB_URI);
 // API Routes
+const buildPath = path.join(__dirname, '../client/build');
+app.use(express.static(buildPath));
 app.use('/api/contact', contactRouter);
 
 
@@ -30,9 +32,14 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }
 // Serve React build in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '../client/build/index.html'))
-  );
+ app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'), (err) => {
+    if (err) {
+      // If index.html is missing, send a JSON error instead of letting it crash
+      res.status(500).json({ error: "Frontend build files missing on server." });
+    }
+  });
+});
 }
 
 
