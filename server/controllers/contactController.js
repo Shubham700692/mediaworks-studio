@@ -16,10 +16,10 @@ exports.sendContact = async (req, res) => {
 
   try {
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'gmail', // This handles the host and port automatically for Render
   auth: {
     user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS, // This MUST be the 16-character code
+    pass: process.env.SMTP_PASS, // Your 16-character code (no spaces)
   },
 });
 

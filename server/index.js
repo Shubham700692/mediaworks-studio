@@ -21,11 +21,11 @@ app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
 app.use(express.json());
 console.log("MONGO:", process.env.MONGODB_URI);
 // API Routes
-const buildPath = path.join(__dirname, '../client/build');
-app.use(express.static(buildPath));
+
 app.use('/api/contact', contactRouter);
 
-
+const buildPath = path.join(__dirname, '../client/build');
+app.use(express.static(buildPath));
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }));
 
