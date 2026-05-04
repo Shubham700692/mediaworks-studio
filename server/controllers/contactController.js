@@ -36,7 +36,10 @@ const transporter = nodemailer.createTransport({
 
     res.json({ success: true, message: 'Your message has been sent!' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to send email. Please try again.' });
+  console.error('Nodemailer error:', err);
+  res.status(500).json({ 
+    error: 'Failed to send email. Please try again.',
+    detail: err.message   // remove this line in production after debugging
+  });
   }
 };
