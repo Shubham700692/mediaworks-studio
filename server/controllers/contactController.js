@@ -16,10 +16,17 @@ exports.sendContact = async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    });
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 465,
+  secure: true, // Use true for 465
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+  connectionTimeout: 5000, // 5 seconds timeout
+  greetingTimeout: 5000,
+  socketTimeout: 5000
+});
 
     await transporter.sendMail({
       from: `"MediaWorks Contact" <${process.env.SMTP_USER}>`,
